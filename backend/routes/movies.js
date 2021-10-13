@@ -16,10 +16,10 @@ router.route('/').get(async(req, res,next) => {
   
 }); 
 
-router.route('/add').post(async(req, res,next) => {
+router.route('/add').post((req, res) => {
     const movie = req.body; 
     try{
-      const newMovie = await new Movie(movie);
+      const newMovie =  new Movie(movie);
   
       newMovie.save()
       .then(() => res.json('Exercise added!' + newMovie))
@@ -66,7 +66,7 @@ router.route('/add').post(async(req, res,next) => {
       const updates = req.body; 
       const options = { new:true}; 
 
-      const result = await movie.findByIdAndUpdate(id,updates,options); 
+      const result = await Movie.findByIdAndUpdate(id,updates,options); 
       res.send(result);
     } catch (error) {
       console.log(error.message);
