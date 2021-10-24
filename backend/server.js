@@ -2,7 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-require('dotenv').config();
+require('dotenv').config(); 
+const users = require("./routes/users");
+const auth = require("./routes/auth");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -23,8 +25,12 @@ mongoose.connect(uri, { useNewUrlParser: true,useUnifiedTopology: true})
 const moviesRouter = require('./routes/movies');
 //const reviewRouter = require('./routes/reviews');
 
-app.use('/movies', moviesRouter);
-//app.use('/reviews', reviewRouter);
+app.use('/movies', moviesRouter); 
+
+//app.use('/reviews', reviewRouter); 
+
+app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 /*app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
