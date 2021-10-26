@@ -33,9 +33,10 @@ const movieSchema = new Schema({
     
   }, 
   creator: {
-    type: String,
+    creatorId: {type: Schema.Types.ObjectId,
     required: true,
-    trim: true
+    },
+    creatorName: {type: String, required:true}
    
     
   },
@@ -45,7 +46,8 @@ const movieSchema = new Schema({
   ReleaseDate: { type: Date,required:true},  
   tags:[String], 
   Cast:[String],
-  reviews: [{}], 
+   
+  LikedBy :[Schema.Types.ObjectId],
   SelectedImg: { type: String},
   UploadedAt: { type: Date,default: new Date()},   
 

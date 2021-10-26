@@ -3,6 +3,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config(); 
+
+const moviesRouter = require('./routes/movies');
+const reviewRouter = require('./routes/reviews'); 
 const users = require("./routes/users");
 const auth = require("./routes/auth");
 
@@ -12,7 +15,9 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json({ limit: "30mb",extended: true}));  
 app.use(bodyParser.urlencoded({ limit: "30mb",extended: true})); 
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); 
+
+
 
 const uri = process.env.URI;
 
@@ -22,12 +27,12 @@ mongoose.connect(uri, { useNewUrlParser: true,useUnifiedTopology: true})
 
 
 
-const moviesRouter = require('./routes/movies');
-//const reviewRouter = require('./routes/reviews');
+
+
 
 app.use('/movies', moviesRouter); 
 
-//app.use('/reviews', reviewRouter); 
+app.use('/reviews', reviewRouter); 
 
 app.use("/api/users", users);
 app.use("/api/auth", auth);
