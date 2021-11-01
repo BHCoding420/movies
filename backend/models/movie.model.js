@@ -48,6 +48,7 @@ const movieSchema = new Schema({
   Cast:[String],
    
   LikedBy :[Schema.Types.ObjectId],
+  NbOfLikes:{type: Number, required:true,default: 0 },
   SelectedImg: { type: String},
   UploadedAt: { type: Date,default: new Date()},   
 

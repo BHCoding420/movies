@@ -3,22 +3,32 @@ const Schema = mongoose.Schema;
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 
+const EmailValidator = (email) => {
+  const regEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if( !regEmail.test(email) ) {
+    return false;
+  } 
+  return true;
+}
+
 const userSchema = new mongoose.Schema({ 
   name: {
     type: String,
+    
     
   },
   email: {
     type: String,
     required: [true, 'Please enter an email'],
     unique: true,
-    lowercase: true,
+    lowercase: true, 
+    
     
   },
   password: {
     type: String,
     required: [true, 'Please enter a password'],
-    minlength: [6, 'Minimum password length is 6 characters'],
+   
   }
 });
 
